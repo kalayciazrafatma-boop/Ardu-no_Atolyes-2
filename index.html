@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Arduino Atölye Seti</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <main class="workbench">
+            <header>
+                <h1>Mega Arduino Atölye Seti</h1>
+            </header>
+            <div id="materials-grid" class="grid">
+                <div class="loading">API'den veriler çekiliyor...</div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="status-section">
+                <h3>SİSTEM LOGLARI</h3>
+                <div id="api-status" class="terminal-text">> Başlatılıyor...</div>
+            </div>
+            
+            <div class="project-section">
+                <h3>GÜNCEL PROJE</h3>
+                <ul id="selected-items-list" class="item-list">
+                    <li class="empty-msg">Proje tahtası boş. Masadan malzeme seçin.</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
