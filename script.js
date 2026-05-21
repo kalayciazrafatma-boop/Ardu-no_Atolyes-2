@@ -61,7 +61,6 @@ const materialData = {
     "Yağmur Sensörü": { img: "yagmur_sensoru.jpg", desc: "Su damlalarını algılayan sensör." }
 };
 
-// 2. BU BÖLÜMÜ DEĞİŞTİR: Proje Veritabanı (Stabil Şema Linkleri Dahil)
 const projectDatabase = [
     {
         id: "p1",
@@ -92,3 +91,95 @@ const projectDatabase = [
         image: "https://maker.robotistan.com/wp-content/uploads/2016/05/arduino-ses-sensoru.jpg"
     }
 ];
+
+let selectedInventory = [];
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderInventory(Object.keys(materialData));
+});
+
+function renderInventory(items) {
+    const list = document.getElementById('inventory-list');
+    if(!list) return;
+    list.innerHTML = "";
+    items.forEach(name => {
+        const data = materialData[name];
+        const div = document.createElement('div');
+        div.className = 'inv-item';
+        div.innerHTML = `
+            <strong>${name}</strong>
+            <p style="font-size:10px; color:#aaa; margin:5px 0;">${data.desc}</p>
+            <span style="color:#00f3ff; font-size:10px;">Ekle +</span>
+        `;
+        div.onclick = () => addToTable(name);
+        list.appendChild(div);
+    });
+}
+
+function searchParts() {
+    const term = document.getElementById('partSearch').value.toLowerCase();
+    const filtered = Object.keys(materialData).filter(name => name.toLowerCase().includes(term));
+    renderInventory(filtered);
+}
+
+function addToTable(name) {
+    if (!selectedInventory.includes(name)) {
+        selectedInventory.push(name);
+        document.getElementById('part-count').innerText = selectedInventory.length;
+        
+        const itemContainer = document.createElement('div');
+        itemContainer.className = "placed-part";
+        itemContainer.style.position = "absolute";
+        itemContainer.style.left = Math.random() * 70 + 10 + "%";
+        itemContainer.style.top = Math.random() * 50 + 20 + "%";
+        
+        const imgSrc = materialData[name].img;
+        
+        itemContainer.innerHTML = `
+            <div style="position:relative; text-align:center; cursor:pointer;" onclick="removeFromTable('${name}', this.parentElement)">
+                <span style="position:absolute; top:-12px; right:-12px; background:red; color:white; border-radius:50%; width:20px; height:20px; font-size:12px; display:flex; align-items:center; justify-content:center; z-index:10;">X</span>
+                <img src="${imgSrc}" width="75" title="${name}" style="border: 2px solid #00f3ff; border-radius: 8px; background: #fff; box-shadow: 0 0 10px #00f3ff;">
+                <div style="font-size: 10px; color: #00f3ff; font-weight: bold; margin-top: 4px; text-shadow: 1px 1px 2px #000;">${name}</div>
+            </div>
+        `;
+        document.getElementById('table-canvas').appendChild(itemContainer);
+        checkProjects();
+    }
+}
+
+function removeFromTable(name, element) {
+    selectedInventory = selectedInventory.filter(item => item !== name);
+    element.remove();
+    document.getElementById('part-count').innerText = selectedInventory.length;
+    checkProjects();
+}
+
+function checkProjects() {
+    const available = projectDatabase.filter(proj => 
+        proj.required.every(req => selectedInventory.includes(req))
+    );
+
+    const linkBox = document.getElementById('project-links');
+    if(available.length > 0) {
+        linkBox.innerHTML = available.map(p => 
+            `<button class="project-btn" onclick="openManual('${p.id}')">${p.name}</button>`
+        ).join('');
+    } else {
+        linkBox.innerHTML = `<p style="font-size: 11px; color: #888;">Eksik parçaları ekle...</p>`;
+    }
+}
+
+function openManual(id) {
+    const proj = projectDatabase.find(p => p.id === id);
+    document.getElementById('m-project-name').innerText = proj.name;
+    document.getElementById('m-project-steps').innerText = proj.steps;
+    document.getElementById('m-project-img').src = proj.image;
+    document.getElementById('m-project-parts').innerHTML = proj.required.map(p => 
+        `<span class="part-tag">${p}</span>`
+    ).join('');
+    document.getElementById('manual-modal').style.display = "block";
+}
+
+function closeManual() {
+    document.getElementById('manual-modal').style.display = "none";
+}
