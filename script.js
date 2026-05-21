@@ -4,6 +4,7 @@ const materialData = {
     "24V Röle": { img: "24v_role.jpg", desc: "Yüksek voltajlı cihazları kontrol etmek içindir." },
     "Alev Sensörü": { img: "ates_sensoru.jpg", desc: "Yangın ve kızılötesi ışığı algılar." },
     "Arduino Uno R3": { img: "arduino_uno.jpg", desc: "Sistemin beyni, kodları işleyen merkez." },
+    "Ateş Sensörü": { img: "ates_sensoru.jpg", desc: "Alev ve yangın algılama modülü." },
     "Breadboard": { img: "breadboard.jpg", desc: "Lehimsiz devre kurma ve test tahtası." },
     "Buton": { img: "buton.jpg", desc: "Basıldığında sinyal gönderen anahtar." },
     "Buzzer": { img: "buzzer.jpg", desc: "Sesli uyarı ve sinyal vermeyi sağlar." },
@@ -26,16 +27,16 @@ const materialData = {
     "Krokodil Kablo": { img: "krokodil.jpg", desc: "Hızlı test bağlantısı için kıskaçlı kablo." },
     "Kumpas": { img: "kumpas.jpg", desc: "Hassas uzunluk ve çap ölçüm aracı." },
     "L293D Entegre": { img: "l293d.jpg", desc: "Küçük motorlar için sürücü çipi." },
-    "L298N Motor Sürücü": { img: "l298n.jpg", desc: "DC motorların hız ve yönünü belirler." },
+    "L298N Motor Sürücü": { img: "l298n.jpg", desc: "Büyük motorların hız ve yönünü belirler." },
     "LCD Ekran": { img: "lcd_ekran.jpg", desc: "Bilgi ve verileri yazdırmak için ekran." },
-    "LED": { img: "led.jpg", desc: "Işıklı bildirim elemanı." },
+    "LED": { img: "led.jpg", desc: "Işıklı bildirim ve aydınlatma elemanı." },
     "Lehim Pastası": { img: "lehim_pastasi.jpg", desc: "Lehimi kolaylaştıran temizleyici madde." },
     "Lehim Pompası": { img: "lehim_pompasi.jpg", desc: "Eski lehimi çekip temizleyen pompa." },
     "Lehim Standı": { img: "lehim_standi.jpg", desc: "Sıcak havyayı tutan güvenlik standı." },
     "Lehim Teli": { img: "lehim_teli.jpg", desc: "Bağlantı için eritilen metal tel." },
     "Makaron": { img: "makaron.jpg", desc: "Isıyla daralan kablo yalıtımı." },
     "Mesafe Sensörü": { img: "mesafe_sensoru.jpg", desc: "Engel mesafesini ultrasonik ölçer." },
-    "Mikrofon Modülü": { img: "mikrofon_modulu.jpg", desc: "Ortamdaki ses şiddetini algılar." },
+    "Mikrofon Modülü": { img: "mikrofon_modulu.jpg", desc: "Ortamdaki ses şiddetini algılar." }, // DÜZELTİLDİ
     "Multimetre": { img: "multimetre.jpg", desc: "Voltaj, akım ve direnç ölçer." },
     "Nabız Sensörü": { img: "nabiz_sensoru.jpg", desc: "Kalp atış hızını ölçen sensör." },
     "Nem Kontrol Sensörü": { img: "nem_kontrol.jpg", desc: "Toprak nemini takip eden sensör." },
@@ -49,14 +50,14 @@ const materialData = {
     "RTC Saat Modülü": { img: "rtc_modul.jpg", desc: "Gerçek zamanlı saat bilgisini tutar." },
     "Sarhoş Tekerlek": { img: "sarhos_tekerlek.jpg", desc: "Robotun kolay dönmesini sağlar." },
     "Servo Motor": { img: "servo.jpg", desc: "Hassas açıyla dönen motor." },
-    "Ses Sensörü": { img: "ses_sensoru.jpg", desc: "Sesleri algılayıp sinyale çevirir." },
+    "Ses Sensörü": { img: "ses_sensoru.jpg", desc: "Sesleri elektrik sinyaline çevirir." },
     "Sigorta": { img: "sigorta.jpg", desc: "Devreyi aşırı akıma karşı korur." },
     "Su Pompası": { img: "su_pompasi.jpg", desc: "Sıvı aktarımını sağlayan motor." },
     "Tact Buton": { img: "tact_buton.jpg", desc: "Küçük devre tetikleyici buton." },
-    "Tekerlek": { img: "Tekerlek.jpg", desc: "Robot şaseleri için ana tekerlek." },
+    "Tekerlek": { img: "Tekerlek.jpg", desc: "Robot şaseleri için ana tekerlek." }, // DÜZELTİLDİ
     "Touch Pad": { img: "touch_pad.jpg", desc: "Dokunmatik kontrol yüzeyi." },
     "TP4056 Şarj Modülü": { img: "tp4056.jpg", desc: "Lityum pil şarj devresi." },
-    "Transistör": { img: "transistor.jpg", desc: "Sinyalleri anahtarlayan veya yükselten eleman." },
+    "Transistör": { img: "transistor.jpg", desc: "Sinyal anahtarlayan devre elemanı." },
     "USB Kablo": { img: "usb.jpg", desc: "Arduino kod yükleme kablosu." },
     "Yağmur Sensörü": { img: "yagmur_sensoru.jpg", desc: "Su damlalarını algılayan sensör." }
 };
@@ -66,37 +67,30 @@ const projectDatabase = [
         id: "p1",
         name: "Akıllı Park Sensörü",
         required: ["Arduino Uno R3", "Mesafe Sensörü", "Buzzer", "LCD Ekran"],
-        steps: "1. Mesafe sensörünü VCC-5V, GND-GND, Trig-9, Echo-8 pinlerine bağlayın. 2. Buzzer'ı 10. pine takın. 3. Mesafe azaldıkça buzzer bip sesini hızlandıracak kodu yükleyin.",
-        image: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/master/hc-sr04/hc-sr04-arduino-baglanti-semasi.png"
+        steps: "1. Mesafe sensörünü VCC-5V, GND-GND, Trig-9, Echo-8 pinlerine bağlayın. 2. Buzzer'ı 10. pine takın. 3. Mesafe azaldıkça buzzer sesini hızlandıracak kodu yükleyin.",
+        image: "https://www.robotistan.com/Data/EditorFiles/hc-sr04-arduino-baglanti-semasi.png"
     },
     {
         id: "p2",
         name: "Yüz Tanımalı Kapı Kilidi",
         required: ["ESP32-Cam", "24V Röle", "Servo Motor", "9V Pil"],
-        steps: "1. ESP32-Cam'i programlayın ve röleyi GPIO 4 pinine bağlayın. 2. Yüzünüzü sisteme tanıtın. 3. Tanımlı yüz algılandığında röleyi açıp kilidi tetikleyen kodu yükleyin.",
+        steps: "1. ESP32-Cam modülüne AI yüz tanıma kodunu yükleyin. 2. Röleyi GPIO 4 pinine bağlayın. 3. Yüz tanındığında kapı kilidini açması için kodu aktif edin.",
         image: "https://maker.robotistan.com/wp-content/uploads/2021/04/esp32-cam-kapi-kilidi.jpg"
     },
     {
         id: "p3",
-        name: "Ses Duyarlı Akıllı Işık",
-        required: ["Arduino Uno R3", "Mikrofon Modülü", "LED", "9V Pil"],
-        steps: "1. Mikrofon modülünü analog pinine bağlayın. 2. Ortamdaki ses seviyesi belirlediğiniz eşiği aşınca LED'i aktif edin.",
-        image: "https://maker.robotistan.com/wp-content/uploads/2016/05/arduino-ses-sensoru.jpg"
-    },
-    {
-        id: "p4",
-        name: "Otonom Çizgi İzleyen Robot",
+        name: "Çizgi İzleyen Robot",
         required: ["Arduino Uno R3", "L298N Motor Sürücü", "Çizgi Sensörü", "Redüktörlü Motor", "Tekerlek"],
-        steps: "1. L298N sürücüyü motorlara ve Arduino'ya bağlayın. 2. Çizgi sensörlerini zemine paralel hizalayın. 3. Siyah çizgiyi ortalayan kodu yükleyin.",
-        image: "https://lezzetlirobotlar.com/wp-content/uploads/2016/04/cizgi_izleyen_robot_devre_semasi.png"
+        steps: "1. Motorları ve tekerlekleri şaseye monte edin. 2. Çizgi sensörlerini zemine paralel dizin. 3. Siyah çizgiyi takip eden kodu Arduino'ya yükleyin.",
+        image: "https://www.robotistan.com/Data/EditorFiles/cizgi-izleyen-robot-semasi.png"
     }
 ];
 
 let selectedInventory = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    // MALZEMELERİ ALFABETİK SIRALA
-    const sortedNames = Object.keys(materialData).sort((a, b) => a.localeCompare(a, 'tr'));
+    // ALFABETİK SIRALAMA YAPILIYOR
+    const sortedNames = Object.keys(materialData).sort((a, b) => a.localeCompare(b, 'tr'));
     renderInventory(sortedNames);
 });
 
@@ -111,7 +105,7 @@ function renderInventory(items) {
         div.innerHTML = `
             <strong>${name}</strong>
             <p style="font-size:10px; color:#aaa; margin:5px 0;">${data.desc}</p>
-            <span style="color:#00f3ff; font-size:9px; font-weight:bold;">LABORATUVARA EKLE +</span>
+            <span style="color:#39ff14; font-size:9px; font-weight:bold;">EKLE +</span>
         `;
         div.onclick = () => addToTable(name);
         list.appendChild(div);
@@ -131,7 +125,7 @@ function addToTable(name) {
         itemContainer.innerHTML = `
             <div style="position:relative; text-align:center; cursor:pointer;" onclick="removeFromTable('${name}', this.parentElement)">
                 <span style="position:absolute; top:-12px; right:-12px; background:#ff4d4d; color:white; border-radius:50%; width:22px; height:22px; font-size:13px; display:flex; align-items:center; justify-content:center; z-index:10; border:1px solid #fff;">×</span>
-                <img src="${imgSrc}" width="80" style="border: 2px solid #00f3ff; border-radius: 8px; background: #fff; box-shadow: 0 0 10px rgba(0,243,255,0.3);">
+                <img src="${imgSrc}" width="80" style="border: 2px solid #00f3ff; border-radius: 8px; background: #fff;">
                 <div style="font-size: 10px; color: #00f3ff; font-weight: bold; margin-top: 5px; text-shadow: 1px 1px 2px #000;">${name}</div>
             </div>
         `;
@@ -153,7 +147,7 @@ function checkProjects() {
     if (available.length > 0) {
         linkBox.innerHTML = available.map(p => `<button class="project-btn" onclick="openManual('${p.id}')">${p.name}</button>`).join('');
     } else {
-        linkBox.innerHTML = `<p style="font-size: 11px; color: #888;">Gerekli parçalar ekleyin.</p>`;
+        linkBox.innerHTML = `<p style="font-size: 11px; color: #888;">Gerekli parçaları ekleyin.</p>`;
     }
 }
 
@@ -161,7 +155,17 @@ function openManual(id) {
     const proj = projectDatabase.find(p => p.id === id);
     document.getElementById('m-project-name').innerText = proj.name;
     document.getElementById('m-project-steps').innerText = proj.steps;
-    document.getElementById('m-project-img').src = proj.image;
+    
+    const imgEl = document.getElementById('m-project-img');
+    imgEl.src = proj.image;
+    
+    // GÖRSEL YÜKLENMEZSE HATA PANELİNİ DÜZELT
+    imgEl.onerror = function() {
+        this.style.display = 'none';
+        const parent = this.parentElement;
+        parent.innerHTML = `<div style="color:#666; font-size:14px; text-align:center;">Şema görseline şu an ulaşılamıyor, ancak yukarıdaki adımları takip ederek devreyi kurabilirsiniz.</div>`;
+    };
+
     document.getElementById('m-project-parts').innerHTML = proj.required.map(p => `<span class="part-tag">${p}</span>`).join('');
     document.getElementById('manual-modal').style.display = "block";
 }
@@ -172,6 +176,6 @@ function closeManual() {
 
 function searchParts() {
     const term = document.getElementById('partSearch').value.toLowerCase();
-    const filtered = Object.keys(materialData).filter(name => name.toLowerCase().includes(term)).sort((a, b) => a.localeCompare(a, 'tr'));
+    const filtered = Object.keys(materialData).filter(name => name.toLowerCase().includes(term)).sort((a, b) => a.localeCompare(b, 'tr'));
     renderInventory(filtered);
 }
