@@ -3,57 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arduino Maker Studio | Billy</title>
+    <title>Arduino Maker Studio Pro | Billy</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="app-container">
-        <!-- SOL PANEL: Envanter -->
+        <!-- SOL PANEL: 58 Parçalık Malzeme Çantası -->
         <aside class="sidebar">
-            <div class="logo">ARDUINO LAB</div>
-            <h3>MALZEME ÇANTASI</h3>
+            <div class="logo">ARDUINO PRO LAB</div>
+            <div class="search-box">
+                <input type="text" id="partSearch" placeholder="Parça ara..." onkeyup="searchParts()">
+            </div>
+            <h3>ENGERJİ & SENSÖR & ARAÇLAR</h3>
             <div id="inventory-list" class="inventory-grid">
-                <!-- Malzemeler JS ile gelecek -->
+                <!-- 58 Parça JS ile buraya yüklenecek -->
             </div>
         </aside>
 
-        <!-- ORTA ALAN: Deney Masası -->
+        <!-- ANA ALAN: Deney Masası -->
         <main class="workbench">
             <div class="hud-display">
-                <div class="status">SİSTEM: <span id="sys-status">BEKLEMEDE</span></div>
-                <div class="unlocked-projects">
-                    <h4>KİLİDİ AÇILAN PROJELER</h4>
-                    <div id="project-links"></div>
+                <div class="status-panel">
+                    <div class="hud-line">SİSTEM: <span id="sys-status" class="neon-text">AKTİF</span></div>
+                    <div class="hud-line">MASADAKİ PARÇA: <span id="part-count">0</span></div>
+                </div>
+                <div class="project-panel">
+                    <h4>ÜRETİLEBİLİR PROJELER</h4>
+                    <div id="project-links">
+                        <p class="hint">Parçaları masaya sürükle, projeleri keşfet...</p>
+                    </div>
                 </div>
             </div>
             
+            <!-- İnteraktif Izgara Masa -->
             <div id="table-canvas" class="grid-table">
-                <!-- Seçilen parçalar buraya düşecek -->
+                <div class="watermark">BILLY ROBOTICS DESIGN AREA</div>
             </div>
         </main>
     </div>
 
-    <!-- LEGO KILAVUZU MODAL -->
+    <!-- LEGO STİLİ YAPIM KILAVUZU (MODAL) -->
     <div id="manual-modal" class="modal">
         <div class="manual-book">
             <span class="close-manual" onclick="closeManual()">&times;</span>
             <header class="manual-header">
-                <div class="manual-code">BUILD GUIDE #001</div>
+                <div class="manual-id">BUILD GUIDE #2024-V1</div>
                 <h2 id="m-project-name">PROJE ADI</h2>
             </header>
             <div class="manual-body">
                 <div class="manual-visual">
-                    <img id="m-project-img" src="" alt="Proje Şeması">
+                    <!-- İnternetten dinamik gelen proje şeması -->
+                    <img id="m-project-img" src="" alt="Devre Şeması">
                 </div>
                 <div class="manual-steps">
-                    <h3>YAPILIŞ ADIMLARI</h3>
-                    <p id="m-project-steps"></p>
+                    <h3>MONTAJ VE KODLAMA ADIMLARI</h3>
+                    <div class="step-content">
+                        <p id="m-project-steps"></p>
+                    </div>
                 </div>
             </div>
             <footer class="manual-footer">
-                <h3>GEREKLİ PARÇALAR</h3>
+                <h3>BU PROJE İÇİN KULLANILAN PARÇALAR</h3>
                 <div id="m-project-parts" class="parts-tag-cloud"></div>
             </footer>
         </div>
