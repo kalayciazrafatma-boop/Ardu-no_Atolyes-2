@@ -1,58 +1,93 @@
+// PROJE VERİTABANI (İstediğin kadar ekleme yapabiliriz)
 const projectDatabase = [
     {
         id: "p1",
         name: "Çizgi İzleyen Araba",
-        requiredParts: ["Arduino Uno R3", "L298N Motor Sürücü", "Kızılötesi Sensör", "Şase Kiti"],
-        instruction: "Adım 1: Sensörleri şasenin önüne monte edin. Adım 2: Motor sürücüyü Arduino'ya bağlayın...",
-        image: "cizgi-izleyen.jpg"
+        required: ["Arduino Uno R3", "L298N Motor Sürücü", "Kızılötesi Sensör"],
+        steps: "1. Şaseyi kurun. 2. Motorları sürücüye bağlayın. 3. IR sensörleri ön tarafa dizin ve Arduino pinlerine takın.",
+        image: "https://via.placeholder.com/400x300?text=Cizgi+Izleyen+Semasi"
     },
     {
         id: "p2",
-        name: "Engelden Kaçan Robot",
-        requiredParts: ["Arduino Uno R3", "Ultrasonik Sensör", "Servo Motor", "L298N Motor Sürücü"],
-        instruction: "Adım 1: Ultrasonik sensörü servonun üzerine takın. Adım 2: Engel mesafesini 20cm olarak ayarlayın...",
-        image: "engelden-kacan.jpg"
+        name: "Bluetooth Kontrollü Robot",
+        required: ["Arduino Uno R3", "L298N Motor Sürücü", "HC-05 Bluetooth Modülü"],
+        steps: "1. HC-05 modülünü RX/TX pinlerine çapraz bağlayın. 2. Telefon uygulamasını açıp 9600 baud rate ile bağlanın.",
+        image: "https://via.placeholder.com/400x300?text=Bluetooth+Robot+Semasi"
     },
     {
         id: "p3",
-        name: "Bluetooth Kontrollü Araç",
-        requiredParts: ["Arduino Uno R3", "HC-05 Bluetooth Modülü", "L298N Motor Sürücü", "9V Pil"],
-        instruction: "Adım 1: Bluetooth modülünü RX/TX pinlerine bağlayın. Adım 2: Mobil uygulamayı eşleştirin...",
-        image: "bluetooth-araba.jpg"
+        name: "Akıllı Yangın Alarmı",
+        required: ["Arduino Uno R3", "Alev Sensörü", "9V Pil"],
+        steps: "1. Alev sensörünün dijital çıkışını 2. pine bağlayın. 2. Alev algılandığında seri porttan uyarı mesajı gönderin.",
+        image: "https://via.placeholder.com/400x300?text=Yangin+Alarmi+Semasi"
     }
-    // Buraya yüzlerce yeni proje ekleyebilirsin!
 ];
 
-let userInventory = [];
+// ENVANTER VERİSİ
+const allMaterials = [
+    { name: "Arduino Uno R3", desc: "Sistemin beyni." },
+    { name: "L298N Motor Sürücü", desc: "Motorları kontrol eder." },
+    { name: "Kızılötesi Sensör", desc: "Çizgiyi takip eder." },
+    { name: "HC-05 Bluetooth Modülü", desc: "Kablosuz kontrol sağlar." },
+    { name: "Alev Sensörü", desc: "Ateşi algılar." },
+    { name: "9V Pil", desc: "Güç kaynağı." }
+];
 
-// Parça eklendiğinde çalışan fonksiyon
-function addToInventory(partName) {
-    if (!userInventory.includes(partName)) {
-        userInventory.push(partName);
-        checkAvailableProjects();
+let selectedInventory = [];
+
+// Sayfa Başlatma
+document.addEventListener("DOMContentLoaded", () => {
+    const list = document.getElementById('inventory-list');
+    allMaterials.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'inv-item';
+        div.innerHTML = `<strong>${item.name}</strong><p>${item.desc}</p>`;
+        div.onclick = () => addToTable(item.name);
+        list.appendChild(div);
+    });
+});
+
+function addToTable(name) {
+    if (!selectedInventory.includes(name)) {
+        selectedInventory.push(name);
+        document.getElementById('sys-status').innerText = "GÜNCELLENİYOR...";
+        document.getElementById('sys-status').style.color = "#39ff14";
+        
+        // Masaya görsel ekle (Temsili)
+        const itemIcon = document.createElement('div');
+        itemIcon.style.position = "absolute";
+        itemIcon.style.left = Math.random() * 80 + "%";
+        itemIcon.style.top = Math.random() * 60 + 20 + "%";
+        itemIcon.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/908/908424.png" width="50" title="${name}">`;
+        document.getElementById('table-canvas').appendChild(itemIcon);
+
+        checkProjects();
     }
 }
 
-// Hangi projelerin yapılabileceğini bulan motor
-function checkAvailableProjects() {
-    const matchedProjects = projectDatabase.filter(project => 
-        project.requiredParts.every(part => userInventory.includes(part))
+function checkProjects() {
+    const available = projectDatabase.filter(proj => 
+        proj.required.every(req => selectedInventory.includes(req))
     );
 
-    displayProjects(matchedProjects);
+    const linkBox = document.getElementById('project-links');
+    linkBox.innerHTML = available.map(p => 
+        `<button class="project-btn" onclick="openManual('${p.id}')">${p.name} ✅</button>`
+    ).join('');
 }
 
-function displayProjects(projects) {
-    const projectListDiv = document.getElementById('active-projects'); // Sağ paneldeki alan
-    if (projects.length === 0) {
-        projectListDiv.innerHTML = "<p>Daha fazla parça ekleyerek projeleri kilidini aç!</p>";
-        return;
-    }
+function openManual(id) {
+    const proj = projectDatabase.find(p => p.id === id);
+    document.getElementById('m-project-name').innerText = proj.name;
+    document.getElementById('m-project-steps').innerText = proj.steps;
+    document.getElementById('m-project-img').src = proj.image;
+    document.getElementById('m-project-parts').innerHTML = proj.required.map(p => 
+        `<span class="part-tag">${p}</span>`
+    ).join('');
+    
+    document.getElementById('manual-modal').style.display = "block";
+}
 
-    projectListDiv.innerHTML = projects.map(p => `
-        <div class="project-card" onclick="openManual('${p.id}')">
-            <h4>${p.name}</h4>
-            <button>Kılavuzu Görüntüle</button>
-        </div>
-    `).join('');
+function closeManual() {
+    document.getElementById('manual-modal').style.display = "none";
 }
