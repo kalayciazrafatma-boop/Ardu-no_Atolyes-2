@@ -1,3 +1,4 @@
+// ARDUINO LAB - GÜNCEL SCRIPT
 const iconMap = {
     "9V Pil": "9v_pil.jpg",
     "24V Röle": "24v_role.jpg",
@@ -32,7 +33,7 @@ const iconMap = {
     "Lehim Pompası": "lehim_pompasi.jpg",
     "Lehim Standı": "lehim_standi.jpg",
     "Lehim Teli": "lehim_teli.jpg",
-    "Makaron": "lehim_pompasi.jpg", // Klasöründeki isme göre kontrol et
+    "Makaron": "makaron.jpg",
     "Mesafe Sensörü": "mesafe_sensoru.jpg",
     "Mikrofon Modülü": "mikrofon_modul.jpg",
     "Multimetre": "multimetre.jpg",
@@ -52,7 +53,7 @@ const iconMap = {
     "Sigorta": "sigorta.jpg",
     "Su Pompası": "su_pompasi.jpg",
     "Tact Buton": "tact_buton.jpg",
-    "Tekerlek": "Tekerlek.jpg", // Klasöründe büyük 'T' olduğu için böyle yazdım
+    "Tekerlek": "Tekerlek.jpg", // GitHub'da büyük T olduğu için düzelttim
     "Touch Pad": "touch_pad.jpg",
     "TP4056 Şarj Modülü": "tp4056.jpg",
     "Transistör": "transistor.jpg",
@@ -60,23 +61,28 @@ const iconMap = {
     "Yağmur Sensörü": "yagmur_sensoru.jpg"
 };
 
-// 2. ADIM: PROJE VERİTABANI
 const projectDatabase = [
     {
         id: "p1",
         name: "Çizgi İzleyen Akıllı Robot",
         required: ["Arduino Uno R3", "L298N Motor Sürücü", "Çizgi Sensörü", "Redüktörlü Motor", "Tekerlek"],
-        steps: "1. Motorları şaseye sabitleyin. 2. Sensörleri zemine yakın monte edin. 3. Çizgi izleme kodunu yükleyin.",
+        steps: "1. Motorları şaseye sabitleyin. 2. Sensörleri ön tarafa monte edin. 3. Çizgi izleme kodunu yükleyin.",
         image: "https://maker.robotistan.com/wp-content/uploads/2016/06/6-1.jpg"
     },
     {
         id: "p2",
         name: "Yüz Tanımalı Akıllı Kilit",
         required: ["ESP32-Cam", "24V Röle", "Servo Motor", "9V Pil"],
-        steps: "1. ESP32-Cam'e AI yazılımını yükleyin. 2. Yüz algılandığında röleyi tetikleyip kapıyı açın.",
+        steps: "1. ESP32-Cam modülüne AI yazılımını yükleyin. 2. Tanınan bir yüz geldiğinde röleyi tetikleyin.",
         image: "https://vcl.com.tr/wp-content/uploads/2021/04/esp32-cam-face-recognition.jpg"
+    },
+    {
+        id: "p3",
+        name: "Mesafe Ölçer (Park Sensörü)",
+        required: ["Arduino Uno R3", "Mesafe Sensörü", "Buzzer", "LCD Ekran"],
+        steps: "1. Ultrasonik sensörü öne takın. 2. Mesafe azaldıkça buzzer sesini hızlandırın.",
+        image: "https://i.ytimg.com/vi/6f_O89tF6Xo/maxresdefault.jpg"
     }
-    // Buraya istediğin kadar yeni proje ekleyebilirsin!
 ];
 
 let selectedInventory = [];
@@ -91,10 +97,16 @@ function renderInventory(items) {
     items.forEach(name => {
         const div = document.createElement('div');
         div.className = 'inv-item';
-        div.innerHTML = `<strong>${name}</strong><p>Ekle +</p>`;
+        div.innerHTML = `<strong>${name}</strong><p>Laboratuvara Ekle +</p>`;
         div.onclick = () => addToTable(name);
         list.appendChild(div);
     });
+}
+
+function searchParts() {
+    const term = document.getElementById('partSearch').value.toLowerCase();
+    const filtered = Object.keys(iconMap).filter(name => name.toLowerCase().includes(term));
+    renderInventory(filtered);
 }
 
 function addToTable(name) {
@@ -104,35 +116,38 @@ function addToTable(name) {
         
         const itemContainer = document.createElement('div');
         itemContainer.className = "placed-part";
+        itemContainer.id = "part-" + name.replace(/\s+/g, '-'); // Benzersiz ID
         itemContainer.style.position = "absolute";
         itemContainer.style.left = Math.random() * 70 + 10 + "%";
-        itemIcon.style.top = Math.random() * 50 + 20 + "%";
+        itemContainer.style.top = Math.random() * 50 + 20 + "%";
+        itemContainer.style.cursor = "pointer";
         
-        // Görsel Yolu Kontrolü
         const imgSrc = iconMap[name];
         
         itemContainer.innerHTML = `
-            <div class="part-wrapper" style="position:relative; text-align:center;">
-                <span class="remove-btn" onclick="removeFromTable('${name}', this.parentElement.parentElement)" 
-                      style="position:absolute; top:-10px; right:-10px; background:red; color:white; border-radius:50%; width:20px; height:20px; cursor:pointer; font-size:12px; z-index:10; display:flex; align-items:center; justify-content:center;">X</span>
-                <img src="${imgSrc}" width="80" title="${name}" style="border: 2px solid #00f3ff; border-radius: 8px; background: #fff; display:block;">
-                <div style="font-size: 11px; color: #00f3ff; font-weight: bold; margin-top: 5px;">${name}</div>
+            <div style="position:relative; text-align:center;">
+                <span style="position:absolute; top:-10px; right:-10px; background:red; color:white; border-radius:50%; width:20px; height:20px; font-size:12px; display:flex; align-items:center; justify-content:center;">X</span>
+                <img src="${imgSrc}" width="80" title="${name}" style="border: 2px solid #00f3ff; border-radius: 8px; background: #fff; box-shadow: 0 0 15px #00f3ff;">
+                <div style="font-size: 11px; color: #00f3ff; font-weight: bold; margin-top: 5px; text-shadow: 1px 1px 2px #000;">${name}</div>
             </div>
         `;
+
+        // Parçaya tıklayınca silme özelliği
+        itemContainer.onclick = () => removeFromTable(name, itemContainer);
+
         document.getElementById('table-canvas').appendChild(itemContainer);
         checkProjects();
     }
 }
 
-// SİLME FONKSİYONU
 function removeFromTable(name, element) {
-    // Listeden çıkar
+    // Listeden sil
     selectedInventory = selectedInventory.filter(item => item !== name);
-    // Masadan kaldır
+    // Masadan sil
     element.remove();
-    // Parça sayısını güncelle
+    // Sayacı güncelle
     document.getElementById('part-count').innerText = selectedInventory.length;
-    // Projeleri tekrar kontrol et
+    // Projeleri güncelle
     checkProjects();
 }
 
