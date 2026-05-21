@@ -14,11 +14,11 @@
         <aside class="sidebar">
             <div class="logo">ARDUINO PRO LAB</div>
             <div class="search-box">
-                <input type="text" id="partSearch" placeholder="Parça ara..." onkeyup="searchParts()">
+                <input type="text" id="partSearch" placeholder="Parça ara (Sensör, Motor...)" onkeyup="searchParts()">
             </div>
-            <h3>ENGERJİ & SENSÖR & ARAÇLAR</h3>
+            <h3>MALZEME ENVANTERİ</h3>
             <div id="inventory-list" class="inventory-grid">
-                <!-- 58 Parça JS ile buraya yüklenecek -->
+                <!-- 58 Parça JS ile yüklenecek -->
             </div>
         </aside>
 
@@ -26,20 +26,19 @@
         <main class="workbench">
             <div class="hud-display">
                 <div class="status-panel">
-                    <div class="hud-line">SİSTEM: <span id="sys-status" class="neon-text">AKTİF</span></div>
-                    <div class="hud-line">MASADAKİ PARÇA: <span id="part-count">0</span></div>
+                    <div class="hud-line">SİSTEM: <span id="sys-status" class="neon-text">HAZIR</span></div>
+                    <div class="hud-line">MASADA: <span id="part-count">0</span> PARÇA</div>
                 </div>
                 <div class="project-panel">
                     <h4>ÜRETİLEBİLİR PROJELER</h4>
                     <div id="project-links">
-                        <p class="hint">Parçaları masaya sürükle, projeleri keşfet...</p>
+                        <p class="hint">Parçaları ekle, projelerin kilidini aç!</p>
                     </div>
                 </div>
             </div>
             
-            <!-- İnteraktif Izgara Masa -->
             <div id="table-canvas" class="grid-table">
-                <div class="watermark">BILLY ROBOTICS DESIGN AREA</div>
+                <div class="watermark">BILLY VIRTUAL ROBOTICS AREA</div>
             </div>
         </main>
     </div>
@@ -49,23 +48,22 @@
         <div class="manual-book">
             <span class="close-manual" onclick="closeManual()">&times;</span>
             <header class="manual-header">
-                <div class="manual-id">BUILD GUIDE #2024-V1</div>
+                <div class="manual-id">SORBIL BUILD GUIDE #2024-V2</div>
                 <h2 id="m-project-name">PROJE ADI</h2>
             </header>
             <div class="manual-body">
                 <div class="manual-visual">
-                    <!-- İnternetten dinamik gelen proje şeması -->
                     <img id="m-project-img" src="" alt="Devre Şeması">
                 </div>
                 <div class="manual-steps">
-                    <h3>MONTAJ VE KODLAMA ADIMLARI</h3>
+                    <h3>MONTAJ VE KODLAMA REHBERİ</h3>
                     <div class="step-content">
                         <p id="m-project-steps"></p>
                     </div>
                 </div>
             </div>
             <footer class="manual-footer">
-                <h3>BU PROJE İÇİN KULLANILAN PARÇALAR</h3>
+                <h3>BU PROJE İÇİN GEREKLİ TÜM PARÇALAR</h3>
                 <div id="m-project-parts" class="parts-tag-cloud"></div>
             </footer>
         </div>
