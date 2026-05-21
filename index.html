@@ -3,35 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arduino Gerçek Zamanlı Atölye Masası</title>
+    <title>Arduino Maker Studio | Billy</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <main class="workbench">
-            <header>
-                <h1>Arduino Deney Masası</h1>
-                <p class="subtitle">Masadan bir malzeme seç ve projene ekle</p>
-            </header>
-            
-            <div id="materials-list" class="material-list-container">
-                <div class="loading">Envanter masaya diziliyor...</div>
-            </div>
-        </main>
 
+    <div class="app-container">
+        <!-- SOL PANEL: Envanter -->
         <aside class="sidebar">
-            <div class="status-section">
-                <h3>SİSTEM DURUMU</h3>
-                <div id="api-status" class="terminal-text">> Başlatılıyor...</div>
-            </div>
-            
-            <div class="project-section">
-                <h3>AKTİF PROJE</h3>
-                <ul id="selected-items-list" class="active-project-list">
-                    <li class="empty-msg">Proje tahtası boş. Masadan malzeme seçin.</li>
-                </ul>
+            <div class="logo">ARDUINO LAB</div>
+            <h3>MALZEME ÇANTASI</h3>
+            <div id="inventory-list" class="inventory-grid">
+                <!-- Malzemeler JS ile gelecek -->
             </div>
         </aside>
+
+        <!-- ORTA ALAN: Deney Masası -->
+        <main class="workbench">
+            <div class="hud-display">
+                <div class="status">SİSTEM: <span id="sys-status">BEKLEMEDE</span></div>
+                <div class="unlocked-projects">
+                    <h4>KİLİDİ AÇILAN PROJELER</h4>
+                    <div id="project-links"></div>
+                </div>
+            </div>
+            
+            <div id="table-canvas" class="grid-table">
+                <!-- Seçilen parçalar buraya düşecek -->
+            </div>
+        </main>
+    </div>
+
+    <!-- LEGO KILAVUZU MODAL -->
+    <div id="manual-modal" class="modal">
+        <div class="manual-book">
+            <span class="close-manual" onclick="closeManual()">&times;</span>
+            <header class="manual-header">
+                <div class="manual-code">BUILD GUIDE #001</div>
+                <h2 id="m-project-name">PROJE ADI</h2>
+            </header>
+            <div class="manual-body">
+                <div class="manual-visual">
+                    <img id="m-project-img" src="" alt="Proje Şeması">
+                </div>
+                <div class="manual-steps">
+                    <h3>YAPILIŞ ADIMLARI</h3>
+                    <p id="m-project-steps"></p>
+                </div>
+            </div>
+            <footer class="manual-footer">
+                <h3>GEREKLİ PARÇALAR</h3>
+                <div id="m-project-parts" class="parts-tag-cloud"></div>
+            </footer>
+        </div>
     </div>
 
     <script src="script.js"></script>
