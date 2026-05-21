@@ -1,112 +1,73 @@
 // ARDUINO LAB - GÜNCEL SCRIPT
-const iconMap = {
-    "9V Pil": "9v_pil.jpg",
-    "24V Röle": "24v_role.jpg",
-    "Arduino Uno R3": "arduino_uno.jpg",
-    "Alev Sensörü": "ates_sensoru.jpg",
-    "Breadboard": "breadboard.jpg",
-    "Buton": "buton.jpg",
-    "Buzzer": "buzzer.jpg",
-    "Çizgi Sensörü": "cizgi_sensoru.jpg",
-    "Dijital Amplifikatör": "dijital_amplifikator.jpg",
-    "DIP Switch": "dip_switch.jpg",
-    "Direnç": "direnc.jpg",
-    "DTMF Modülü": "dtmf_modul.jpg",
-    "ESP32-Cam": "esp32_cam.jpg",
-    "Gaz Sensörü": "gaz_sensoru.jpg",
-    "Güneş Paneli": "gunes_paneli.jpg",
-    "Havya": "havya.jpg",
-    "HC-06 Bluetooth": "hc06_bluetooth.jpg",
-    "IR Kumanda Kiti": "ir_kumanda_kit.jpg",
-    "Joystick": "joystick.jpg",
-    "Jumper Kablo": "jumper.jpg",
-    "Kalıcı Buton": "kalici_buton.jpg",
-    "Keypad": "keypad.jpg",
-    "Kondansatör": "kondansator.jpg",
-    "Krokodil Kablo": "krokodil.jpg",
-    "Kumpas": "kumpas.jpg",
-    "L293D Entegre": "l293d.jpg",
-    "L298N Motor Sürücü": "l298n.jpg",
-    "LCD Ekran": "lcd_ekran.jpg",
-    "LED": "led.jpg",
-    "Lehim Pastası": "lehim_pastasi.jpg",
-    "Lehim Pompası": "lehim_pompasi.jpg",
-    "Lehim Standı": "lehim_standi.jpg",
-    "Lehim Teli": "lehim_teli.jpg",
-    "Makaron": "makaron.jpg",
-    "Mesafe Sensörü": "mesafe_sensoru.jpg",
-    "Mikrofon Modülü": "mikrofon_modul.jpg",
-    "Multimetre": "multimetre.jpg",
-    "Nabız Sensörü": "nabiz_sensoru.jpg",
-    "Nem Kontrol Sensörü": "nem_kontrol.jpg",
-    "Piezo Buzzer": "piezo_buzzer.jpg",
-    "Pil Yuvası": "pil_yuvasi.jpg",
-    "PIR Sensör": "pir_sensor.jpg",
-    "Potansiyometre": "potansiyometre.jpg",
-    "Redüktörlü Motor": "reduktorlu_motor.jpg",
-    "Voltaj Regülatörü": "regulator.jpg",
-    "RFID Kit": "rfid_kit.jpg",
-    "RTC Saat Modülü": "rtc_modul.jpg",
-    "Sarhoş Tekerlek": "sarhos_tekerlek.jpg",
-    "Servo Motor": "servo.jpg",
-    "Ses Sensörü": "ses_sensoru.jpg",
-    "Sigorta": "sigorta.jpg",
-    "Su Pompası": "su_pompasi.jpg",
-    "Tact Buton": "tact_buton.jpg",
-    "Tekerlek": "Tekerlek.jpg", // GitHub'da büyük T olduğu için düzelttim
-    "Touch Pad": "touch_pad.jpg",
-    "TP4056 Şarj Modülü": "tp4056.jpg",
-    "Transistör": "transistor.jpg",
-    "USB Kablo": "usb.jpg",
-    "Yağmur Sensörü": "yagmur_sensoru.jpg"
+const materialData = {
+    "9V Pil": { img: "9v_pil.jpg", desc: "Projen için taşınabilir güç kaynağı sağlar." },
+    "24V Röle": { img: "24v_role.jpg", desc: "Yüksek voltajlı cihazları güvenli anahtarlar." },
+    "Arduino Uno R3": { img: "arduino_uno.jpg", desc: "Sistemin beyni, mikrodenetleyici kartı." },
+    "Alev Sensörü": { img: "ates_sensoru.jpg", desc: "Yangın ve kızılötesi ışığı algılar." },
+    "Breadboard": { img: "breadboard.jpg", desc: "Lehimsiz devre kurma test tahtası." },
+    "Buton": { img: "buton.jpg", desc: "Basıldığında devreyi tamamlayan anahtar." },
+    "Buzzer": { img: "buzzer.jpg", desc: "Sesli uyarı ve sinyal verir." },
+    "Çizgi Sensörü": { img: "cizgi_sensoru.jpg", desc: "Zemindeki siyah ve beyaz farkını algılar." },
+    "ESP32-Cam": { img: "esp32_cam.jpg", desc: "Wi-Fi destekli kamera ve işlemci modülü." },
+    "HC-06 Bluetooth": { img: "hc06_bluetooth.jpg", desc: "Telefonla kablosuz bağlantı kurar." },
+    "L298N Motor Sürücü": { img: "l298n.jpg", desc: "DC motorların hız ve yönünü kontrol eder." },
+    "LCD Ekran": { img: "lcd_ekran.jpg", desc: "Verileri görsel olarak yazdırmanı sağlar." },
+    "Mesafe Sensörü": { img: "mesafe_sensoru.jpg", desc: "Engelleri ultrasonik dalgalarla algılar." },
+    "Mikrofon Modülü": { img: "mikrofon_modul.jpg", desc: "Ortamdaki ses şiddetini ölçer." }, // İsmi düzelttim
+    "Sigorta": { img: "sigorta.jpg", desc: "Devreyi aşırı akımdan korur." },
+    "Servo Motor": { img: "servo.jpg", desc: "Hassas açıyla dönen motor." },
+    "Tekerlek": { img: "Tekerlek.jpg", desc: "Motor miline takılan tekerlek." },
+    "Jumper Kablo": { img: "jumper.jpg", desc: "Devre elemanları arası bağlantı sağlar." },
+    // Diğer malzemelerini de bu formatta ekleyebilirsin
 };
 
+// 2. ADIM: PROJE VERİTABANI (Daha sağlam görsel linkleri eklendi)
 const projectDatabase = [
     {
         id: "p1",
         name: "Çizgi İzleyen Akıllı Robot",
-        required: ["Arduino Uno R3", "L298N Motor Sürücü", "Çizgi Sensörü", "Redüktörlü Motor", "Tekerlek"],
-        steps: "1. Motorları şaseye sabitleyin. 2. Sensörleri ön tarafa monte edin. 3. Çizgi izleme kodunu yükleyin.",
+        required: ["Arduino Uno R3", "L298N Motor Sürücü", "Çizgi Sensörü", "Tekerlek"],
+        steps: "1. Motorları şaseye sabitleyin. 2. Sensörleri zemine yakın monte edin. 3. Çizgi izleme kodunu yükleyin.",
         image: "https://maker.robotistan.com/wp-content/uploads/2016/06/6-1.jpg"
     },
     {
         id: "p2",
-        name: "Yüz Tanımalı Akıllı Kilit",
-        required: ["ESP32-Cam", "24V Röle", "Servo Motor", "9V Pil"],
-        steps: "1. ESP32-Cam modülüne AI yazılımını yükleyin. 2. Tanınan bir yüz geldiğinde röleyi tetikleyin.",
-        image: "https://vcl.com.tr/wp-content/uploads/2021/04/esp32-cam-face-recognition.jpg"
+        name: "Akıllı Park Sensörü",
+        required: ["Arduino Uno R3", "Mesafe Sensörü", "Buzzer", "LCD Ekran"],
+        steps: "1. Mesafe sensörünü takın. 2. Mesafe kısaldıkça buzzerı hızlandırın. 3. Değeri LCD'de görün.",
+        image: "https://i.ytimg.com/vi/6f_O89tF6Xo/maxresdefault.jpg"
     },
     {
         id: "p3",
-        name: "Mesafe Ölçer (Park Sensörü)",
-        required: ["Arduino Uno R3", "Mesafe Sensörü", "Buzzer", "LCD Ekran"],
-        steps: "1. Ultrasonik sensörü öne takın. 2. Mesafe azaldıkça buzzer sesini hızlandırın.",
-        image: "https://i.ytimg.com/vi/6f_O89tF6Xo/maxresdefault.jpg"
+        name: "Ses Duyarlı Işık Sistemi",
+        required: ["Arduino Uno R3", "Mikrofon Modülü", "LED", "9V Pil"],
+        steps: "1. Mikrofon modülünü bağlayın. 2. Ses seviyesi artınca LED'in yanmasını sağlayın.",
+        image: "https://maker.robotistan.com/wp-content/uploads/2016/05/arduino-ses-sensoru.jpg"
     }
 ];
 
 let selectedInventory = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    renderInventory(Object.keys(iconMap));
+    renderInventory(Object.keys(materialData));
 });
 
 function renderInventory(items) {
     const list = document.getElementById('inventory-list');
     list.innerHTML = "";
     items.forEach(name => {
+        const data = materialData[name];
         const div = document.createElement('div');
         div.className = 'inv-item';
-        div.innerHTML = `<strong>${name}</strong><p>Laboratuvara Ekle +</p>`;
+        // MALZEME AÇIKLAMALARI BURADA EKLENİYOR
+        div.innerHTML = `
+            <strong>${name}</strong>
+            <p style="font-size:11px; color:#aaa; margin:5px 0;">${data.desc}</p>
+            <span style="color:#00f3ff; font-size:10px;">Laboratuvara Ekle +</span>
+        `;
         div.onclick = () => addToTable(name);
         list.appendChild(div);
     });
-}
-
-function searchParts() {
-    const term = document.getElementById('partSearch').value.toLowerCase();
-    const filtered = Object.keys(iconMap).filter(name => name.toLowerCase().includes(term));
-    renderInventory(filtered);
 }
 
 function addToTable(name) {
@@ -116,13 +77,12 @@ function addToTable(name) {
         
         const itemContainer = document.createElement('div');
         itemContainer.className = "placed-part";
-        itemContainer.id = "part-" + name.replace(/\s+/g, '-'); // Benzersiz ID
         itemContainer.style.position = "absolute";
         itemContainer.style.left = Math.random() * 70 + 10 + "%";
         itemContainer.style.top = Math.random() * 50 + 20 + "%";
         itemContainer.style.cursor = "pointer";
         
-        const imgSrc = iconMap[name];
+        const imgSrc = materialData[name].img;
         
         itemContainer.innerHTML = `
             <div style="position:relative; text-align:center;">
@@ -132,22 +92,16 @@ function addToTable(name) {
             </div>
         `;
 
-        // Parçaya tıklayınca silme özelliği
         itemContainer.onclick = () => removeFromTable(name, itemContainer);
-
         document.getElementById('table-canvas').appendChild(itemContainer);
         checkProjects();
     }
 }
 
 function removeFromTable(name, element) {
-    // Listeden sil
     selectedInventory = selectedInventory.filter(item => item !== name);
-    // Masadan sil
     element.remove();
-    // Sayacı güncelle
     document.getElementById('part-count').innerText = selectedInventory.length;
-    // Projeleri güncelle
     checkProjects();
 }
 
@@ -162,7 +116,7 @@ function checkProjects() {
             `<button class="project-btn" onclick="openManual('${p.id}')">${p.name}</button>`
         ).join('');
     } else {
-        linkBox.innerHTML = `<p style="font-size: 11px; color: #888;">Parçaları ekleyerek projeleri keşfet!</p>`;
+        linkBox.innerHTML = `<p style="font-size: 11px; color: #888;">Gerekli parçaları ekleyerek projeleri keşfet!</p>`;
     }
 }
 
