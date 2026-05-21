@@ -94,13 +94,14 @@ const projectDatabase = [
 
 let selectedInventory = [];
 
+// Sayfa yüklendiğinde envanteri göster
 document.addEventListener("DOMContentLoaded", () => {
     renderInventory(Object.keys(materialData));
 });
 
 function renderInventory(items) {
     const list = document.getElementById('inventory-list');
-    if(!list) return;
+    if (!list) return; // Liste bulunamazsa hata verme
     list.innerHTML = "";
     items.forEach(name => {
         const data = materialData[name];
@@ -109,48 +110,46 @@ function renderInventory(items) {
         div.innerHTML = `
             <strong>${name}</strong>
             <p style="font-size:10px; color:#aaa; margin:5px 0;">${data.desc}</p>
-            <span style="color:#00f3ff; font-size:10px;">Ekle +</span>
+            <span style="color:#00f3ff; font-size:10px;">Masaya Ekle +</span>
         `;
         div.onclick = () => addToTable(name);
         list.appendChild(div);
     });
 }
 
-function searchParts() {
-    const term = document.getElementById('partSearch').value.toLowerCase();
-    const filtered = Object.keys(materialData).filter(name => name.toLowerCase().includes(term));
-    renderInventory(filtered);
-}
-
 function addToTable(name) {
     if (!selectedInventory.includes(name)) {
         selectedInventory.push(name);
-        document.getElementById('part-count').innerText = selectedInventory.length;
+        const countEl = document.getElementById('part-count');
+        if (countEl) countEl.innerText = selectedInventory.length;
         
         const itemContainer = document.createElement('div');
         itemContainer.className = "placed-part";
         itemContainer.style.position = "absolute";
-        itemContainer.style.left = Math.random() * 70 + 10 + "%";
-        itemContainer.style.top = Math.random() * 50 + 20 + "%";
+        itemContainer.style.left = (Math.random() * 60 + 10) + "%";
+        itemContainer.style.top = (Math.random() * 40 + 20) + "%";
         
         const imgSrc = materialData[name].img;
         
         itemContainer.innerHTML = `
             <div style="position:relative; text-align:center; cursor:pointer;" onclick="removeFromTable('${name}', this.parentElement)">
-                <span style="position:absolute; top:-12px; right:-12px; background:red; color:white; border-radius:50%; width:20px; height:20px; font-size:12px; display:flex; align-items:center; justify-content:center; z-index:10;">X</span>
-                <img src="${imgSrc}" width="75" title="${name}" style="border: 2px solid #00f3ff; border-radius: 8px; background: #fff; box-shadow: 0 0 10px #00f3ff;">
-                <div style="font-size: 10px; color: #00f3ff; font-weight: bold; margin-top: 4px; text-shadow: 1px 1px 2px #000;">${name}</div>
+                <span style="position:absolute; top:-12px; right:-12px; background:red; color:white; border-radius:50%; width:22px; height:22px; font-size:12px; display:flex; align-items:center; justify-content:center; z-index:10; font-weight:bold; box-shadow: 0 0 5px #000;">X</span>
+                <img src="${imgSrc}" width="85" title="${name}" style="border: 2px solid #00f3ff; border-radius: 8px; background: #fff; box-shadow: 0 0 15px #00f3ff;">
+                <div style="font-size: 11px; color: #00f3ff; font-weight: bold; margin-top: 5px; text-shadow: 1px 1px 2px #000;">${name}</div>
             </div>
         `;
-        document.getElementById('table-canvas').appendChild(itemContainer);
+
+        const canvas = document.getElementById('table-canvas');
+        if (canvas) canvas.appendChild(itemContainer);
         checkProjects();
     }
 }
 
 function removeFromTable(name, element) {
     selectedInventory = selectedInventory.filter(item => item !== name);
-    element.remove();
-    document.getElementById('part-count').innerText = selectedInventory.length;
+    if (element) element.remove();
+    const countEl = document.getElementById('part-count');
+    if (countEl) countEl.innerText = selectedInventory.length;
     checkProjects();
 }
 
@@ -160,7 +159,9 @@ function checkProjects() {
     );
 
     const linkBox = document.getElementById('project-links');
-    if(available.length > 0) {
+    if (!linkBox) return;
+
+    if (available.length > 0) {
         linkBox.innerHTML = available.map(p => 
             `<button class="project-btn" onclick="openManual('${p.id}')">${p.name}</button>`
         ).join('');
@@ -171,15 +172,26 @@ function checkProjects() {
 
 function openManual(id) {
     const proj = projectDatabase.find(p => p.id === id);
+    if (!proj) return;
+    
     document.getElementById('m-project-name').innerText = proj.name;
     document.getElementById('m-project-steps').innerText = proj.steps;
     document.getElementById('m-project-img').src = proj.image;
     document.getElementById('m-project-parts').innerHTML = proj.required.map(p => 
         `<span class="part-tag">${p}</span>`
     ).join('');
-    document.getElementById('manual-modal').style.display = "block";
+    
+    const modal = document.getElementById('manual-modal');
+    if (modal) modal.style.display = "block";
 }
 
 function closeManual() {
-    document.getElementById('manual-modal').style.display = "none";
+    const modal = document.getElementById('manual-modal');
+    if (modal) modal.style.display = "none";
+}
+
+function searchParts() {
+    const term = document.getElementById('partSearch').value.toLowerCase();
+    const filtered = Object.keys(materialData).filter(name => name.toLowerCase().includes(term));
+    renderInventory(filtered);
 }
