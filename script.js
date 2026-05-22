@@ -4,7 +4,7 @@ const materialData = {
     "24V Röle": { img: "24v_role.jpg", desc: "Yüksek voltajlı cihazları kontrol etmek içindir." },
     "Alev Sensörü": { img: "ates_sensoru.jpg", desc: "Yangın ve kızılötesi ışığı algılar." },
     "Arduino Uno R3": { img: "arduino_uno.jpg", desc: "Sistemin beyni, kodları işleyen merkez." },
-    "Ateş Sensörü": { img: "ates_sensoru.jpg", desc: "Alev ve yangın algılama modülü." },
+    "Ateş Sensörü": { img: "ates_sensoru.jpg", desc: "Alev algılama modülü." },
     "Breadboard": { img: "breadboard.jpg", desc: "Lehimsiz devre kurma ve test tahtası." },
     "Buton": { img: "buton.jpg", desc: "Basıldığında sinyal gönderen anahtar." },
     "Buzzer": { img: "buzzer.jpg", desc: "Sesli uyarı ve sinyal vermeyi sağlar." },
@@ -50,7 +50,7 @@ const materialData = {
     "RTC Saat Modülü": { img: "rtc_modul.jpg", desc: "Gerçek zamanlı saat bilgisini tutar." },
     "Sarhoş Tekerlek": { img: "sarhos_tekerlek.jpg", desc: "Robotun kolay dönmesini sağlar." },
     "Servo Motor": { img: "servo.jpg", desc: "Hassas açıyla dönen motor." },
-    "Ses Sensörü": { img: "ses_sensoru.jpg", desc: "Sesleri algılayıp sinyale çevirir." },
+    "Ses Sensörü": { img: "ses_sensoru.jpg", desc: "Sesleri elektrik sinyaline çevirir." },
     "Sigorta": { img: "sigorta.jpg", desc: "Devreyi aşırı akıma karşı korur." },
     "Su Pompası": { img: "su_pompasi.jpg", desc: "Sıvı aktarımını sağlayan motor." },
     "Tact Buton": { img: "tact_buton.jpg", desc: "Küçük devre tetikleyici buton." },
@@ -58,36 +58,37 @@ const materialData = {
     "Touch Pad": { img: "touch_pad.jpg", desc: "Dokunmatik kontrol yüzeyi." },
     "TP4056 Şarj Modülü": { img: "tp4056.jpg", desc: "Lityum pil şarj devresi." },
     "Transistör": { img: "transistor.jpg", desc: "Sinyalleri anahtarlayan veya yükselten eleman." },
-    "USB Kablo": { img: "usb.jpg", desc: "Bilgisayardan Arduino'ya veri kablosu." },
+    "USB Kablo": { img: "usb.jpg", desc: "Arduino kod yükleme kablosu." },
     "Yağmur Sensörü": { img: "yagmur_sensoru.jpg", desc: "Su damlalarını algılayan sensör." }
 };
 
 const projectDatabase = [
-    { id: "p1", name: "Bluetooth Araba", required: ["Arduino Uno R3", "HC-06 Bluetooth", "L298N Motor Sürücü", "Redüktörlü Motor", "Tekerlek", "9V Pil"], steps: "1. Bluetooth RX/TX pinlerini bağlayın. 2. Motor sürücüyü Arduino'ya bağlayın. 3. Uygulama ile yön verin.", image: "https://maker.robotistan.com/wp-content/uploads/2017/05/bluetooth-car-schematic.png" },
-    { id: "p2", name: "Engelden Kaçan Robot", required: ["Arduino Uno R3", "Mesafe Sensörü", "Servo Motor", "L298N Motor Sürücü", "Tekerlek"], steps: "1. Mesafe sensörünü servo üzerine monte edin. 2. Engel görünce robotun yönünü değiştirin.", image: "https://maker.robotistan.com/wp-content/uploads/2016/05/HC-SR04-ile-Engelden-Kacan-Robot-Yapiyoruz.jpg" },
-    { id: "p3", name: "RFID Kapı Sistemi", required: ["Arduino Uno R3", "RFID Kit", "Servo Motor", "LCD Ekran"], steps: "1. RFID okuyucuyu SPI pinlerine bağlayın. 2. Kart tanımlandığında servoyu döndürün.", image: "https://maker.robotistan.com/wp-content/uploads/2016/04/rfid-rc522-ile-kapi-kilidi-yapimi.jpg" },
-    { id: "p4", name: "Yangın Alarmı", required: ["Arduino Uno R3", "Alev Sensörü", "Buzzer", "LED"], steps: "1. Alev sensörünü bağlayın. 2. Ateş algılandığında alarm çalmasını sağlayın.", image: "https://maker.robotistan.com/wp-content/uploads/2017/05/alev-sensoru-arduino-baglantisi.png" },
-    { id: "p5", name: "Akıllı Sulama", required: ["Arduino Uno R3", "Nem Kontrol Sensörü", "Su Pompası", "24V Röle"], steps: "1. Toprak nemini ölçün. 2. Nem düşükse pompayı çalıştırın.", image: "https://maker.robotistan.com/wp-content/uploads/2016/03/toprak-nem-sensoru-kullanimi.jpg" },
-    { id: "p6", name: "Ses Kontrollü Işık", required: ["Arduino Uno R3", "Mikrofon Modülü", "24V Röle", "9V Pil"], steps: "1. Mikrofonu bağlayın. 2. Ses gelince röleyi tetikleyin.", image: "https://maker.robotistan.com/wp-content/uploads/2016/05/arduino-ses-sensoru.jpg" },
-    { id: "p7", name: "Joystick Araba", required: ["Arduino Uno R3", "Joystick", "L298N Motor Sürücü", "Tekerlek"], steps: "1. Joystick eksenlerini bağlayın. 2. Motorlara yön verin.", image: "https://maker.robotistan.com/wp-content/uploads/2017/09/joystick-servo.jpg" },
-    { id: "p8", name: "IR Kumanda Robot", required: ["Arduino Uno R3", "IR Kumanda Kiti", "L298N Motor Sürücü", "Tekerlek"], steps: "1. IR alıcıyı bağlayın. 2. Kumanda tuşlarına görev atayın.", image: "https://maker.robotistan.com/wp-content/uploads/2016/05/kizilotesi-sensor-kullanimi.jpg" },
-    { id: "p9", name: "Güvenlik Sistemi", required: ["Arduino Uno R3", "PIR Sensör", "Buzzer", "Keypad"], steps: "1. PIR ile hareket algılayın. 2. Şifre ile alarmı kapatın.", image: "https://maker.robotistan.com/wp-content/uploads/2016/05/pir-sensor-kullanimi.jpg" },
-    { id: "p10", name: "Gaz Alarmı", required: ["Arduino Uno R3", "Gaz Sensörü", "Buzzer", "LCD Ekran"], steps: "1. Gaz değerini ölçün. 2. LCD'de uyarı gösterin.", image: "https://maker.robotistan.com/wp-content/uploads/2017/04/mq-2-gaz-sensoru.jpg" },
-    { id: "p11", name: "WiFi Kamera", required: ["ESP32-Cam", "PIR Sensör", "9V Pil"], steps: "1. ESP32-Cam'i WiFi'ye bağlayın. 2. Hareket olunca görüntü alın.", image: "https://maker.robotistan.com/wp-content/uploads/2021/04/esp32-cam-kapi-kilidi.jpg" },
-    { id: "p12", name: "Nabız Ölçer", required: ["Arduino Uno R3", "Nabız Sensörü", "LCD Ekran"], steps: "1. Sensörü parmağa takın. 2. Kalp atışını LCD'ye yazın.", image: "https://maker.robotistan.com/wp-content/uploads/2017/02/pulse-sensor.jpg" },
-    { id: "p13", name: "Akıllı Sera", required: ["Arduino Uno R3", "Nem Kontrol Sensörü", "Yağmur Sensörü", "LCD Ekran"], steps: "1. Nem ve yağmuru takip edin. 2. LCD'ye yazdırın.", image: "https://maker.robotistan.com/wp-content/uploads/2016/03/yagmur-sensoru-kullanimi.jpg" },
-    { id: "p14", name: "Hassas Saat", required: ["Arduino Uno R3", "RTC Saat Modülü", "LCD Ekran"], steps: "1. RTC'den zamanı çekin. 2. LCD'de saati gösterin.", image: "https://maker.robotistan.com/wp-content/uploads/2016/05/rtc-modulu-ds1302-kullanimi.jpg" },
-    { id: "p15", name: "Touch Lamba", required: ["Arduino Uno R3", "Touch Pad", "24V Röle"], steps: "1. Dokunmatik sensöre basınca röleyi tetikleyin.", image: "https://maker.robotistan.com/wp-content/uploads/2016/06/dokunmatik-sensor-kullanimi.jpg" },
-    { id: "p16", name: "Park Sensörü", required: ["Arduino Uno R3", "Mesafe Sensörü", "Buzzer", "LCD Ekran"], steps: "1. Mesafe sensörünü takın. 2. Mesafeyi santim olarak görün.", image: "https://www.robotistan.com/Data/EditorFiles/hc-sr04-arduino-baglanti-semasi.png" },
-    { id: "p17", name: "Çizgi İzleyen", required: ["Arduino Uno R3", "L298N Motor Sürücü", "Çizgi Sensörü", "Tekerlek"], steps: "1. Sensörleri zemine hizalayın. 2. Çizgiyi takip edin.", image: "https://www.robotistan.com/Data/EditorFiles/cizgi-izleyen-robot-semasi.png" },
-    { id: "p18", name: "Yüz Tanıma", required: ["ESP32-Cam", "24V Röle", "Servo Motor", "9V Pil"], steps: "1. Yüzünüzü tanıtın. 2. Doğru yüzü görünce kapıyı açın.", image: "https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2020/03/ESP32-CAM-Face-Recognition-Door-Lock-System-Circuit.png" }
+    { id: "p1", name: "Bluetooth Araba", required: ["Arduino Uno R3", "HC-06 Bluetooth", "L298N Motor Sürücü", "Redüktörlü Motor", "Tekerlek"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/hc05-bluetooth-modulu/bluetooth-araba.png", text: "ADIM 1: Motor sürücü bağlantılarını ve Bluetooth RX/TX pinlerini Arduino'ya bağlayın." }] },
+    { id: "p2", name: "Engelden Kaçan Robot", required: ["Arduino Uno R3", "Mesafe Sensörü", "Servo Motor", "L298N Motor Sürücü", "Tekerlek"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/hc-sr04/hc-sr04-arduino-baglanti-semasi.png", text: "ADIM 1: Mesafe sensörünü servo üzerine sabitleyip yön algoritmasını yükleyin." }] },
+    { id: "p3", name: "RFID Kapı Sistemi", required: ["Arduino Uno R3", "RFID Kit", "Servo Motor", "LCD Ekran"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/mfrc522-rfid-modulu/rfid-kapi-kilidi.png", text: "ADIM 1: RFID okuyucuyu bağlayın. Tanımlı kart okutulduğunda servoyu döndürün." }] },
+    { id: "p4", name: "Yangın Alarmı", required: ["Arduino Uno R3", "Alev Sensörü", "Buzzer", "LED"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/alev-sensoru/yangin-alarm.png", text: "ADIM 1: Alev sensöründen analog veri okuyup eşik değerde buzzer'ı öttürün." }] },
+    { id: "p5", name: "Akıllı Sulama", required: ["Arduino Uno R3", "Nem Kontrol Sensörü", "Su Pompası", "24V Röle"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/toprak-nem-sensoru/akilli-sulama.png", text: "ADIM 1: Toprak nemi düşünce röle üzerinden su pompasını çalıştırın." }] },
+    { id: "p6", name: "Ses Kontrollü Işık", required: ["Arduino Uno R3", "Mikrofon Modülü", "24V Röle", "9V Pil"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/ses-sensoru/ses-isik.png", text: "ADIM 1: Mikrofon modülü ile el çırpma sesini algılayıp röleyi tetikleyin." }] },
+    { id: "p7", name: "Joystick Kontrollü Araba", required: ["Arduino Uno R3", "Joystick", "L298N Motor Sürücü", "Tekerlek"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/joystick/joystick-araba.png", text: "ADIM 1: Joystick X-Y değerlerine göre motor hızını ve yönünü ayarlayın." }] },
+    { id: "p8", name: "IR Kumandalı Robot", required: ["Arduino Uno R3", "IR Kumanda Kiti", "L298N Motor Sürücü", "Tekerlek"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/ir-alici-verici/ir-robot.png", text: "ADIM 1: Uzaktan kumanda kodlarını Arduino'ya tanıtıp robotu sürün." }] },
+    { id: "p9", name: "Güvenlik Sistemi", required: ["Arduino Uno R3", "PIR Sensör", "Buzzer", "LED"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/pir-sensor/guvenlik.png", text: "ADIM 1: PIR sensörü hareket algıladığında alarmı ve ışıkları aktif edin." }] },
+    { id: "p10", name: "Gaz Alarmı", required: ["Arduino Uno R3", "Gaz Sensörü", "Buzzer", "LCD Ekran"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/mq2-gaz-sensoru/gaz-alarm.png", text: "ADIM 1: Gaz sızıntısı durumunda LCD'de uyarı verip buzzer'ı tetikleyin." }] },
+    { id: "p11", name: "WiFi Kamera Sistemi", required: ["ESP32-Cam", "PIR Sensör", "9V Pil"], steps: [{ img: "https://raw.githubusercontent.com/RuiSantosdotme/ESP32-CAM-Projects/master/ESP32-CAM-PIR-Sensor-Photo/Circuit-Diagram.png", text: "ADIM 1: ESP32-Cam'i WiFi'ye bağlayıp hareket anında fotoğraf çekin." }] },
+    { id: "p12", name: "Nabız Ölçer", required: ["Arduino Uno R3", "Nabız Sensörü", "LCD Ekran"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/nabiz-sensoru/nabiz-olcer.png", text: "ADIM 1: Nabız verisini parmaktan okuyup LCD ekranda grafikleyin." }] },
+    { id: "p13", name: "Akıllı Sera", required: ["Arduino Uno R3", "Nem Kontrol Sensörü", "Yağmur Sensörü", "LCD Ekran"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/akilli-sera/sera.png", text: "ADIM 1: Sera içi nem ve dış yağmur durumunu anlık takip edin." }] },
+    { id: "p14", name: "Saat Sistemi", required: ["Arduino Uno R3", "RTC Saat Modülü", "LCD Ekran"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/rtc-saat-modulu/saat.png", text: "ADIM 1: Gerçek zamanlı saat modülünden veriyi çekip ekrana basın." }] },
+    { id: "p15", name: "Touch Kontrollü Lamba", required: ["Arduino Uno R3", "Touch Pad", "24V Röle"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/touch-pad/touch-lamba.png", text: "ADIM 1: Dokunmatik sensöre her basışta rölenin durumunu değiştirin." }] },
+    { id: "p16", name: "Akıllı Park Sensörü", required: ["Arduino Uno R3", "Mesafe Sensörü", "Buzzer", "LCD Ekran"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/hc-sr04/hc-sr04-arduino-baglanti-semasi.png", text: "ADIM 1: Mesafeyi santimetreye çevirip sesli ve görsel uyarı kurun." }] },
+    { id: "p17", name: "Çizgi İzleyen Robot", required: ["Arduino Uno R3", "L298N Motor Sürücü", "Çizgi Sensörü", "Tekerlek"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/cizgi-izleyen/cizgi-izleyen.png", text: "ADIM 1: Sensörleri şasenin önüne dizip siyah çizgiyi takip ettirin." }] },
+    { id: "p18", name: "Yüz Tanımalı Ev Sistemi", required: ["ESP32-Cam", "24V Röle", "Servo Motor", "9V Pil"], steps: [{ img: "https://raw.githubusercontent.com/RuiSantosdotme/ESP32-CAM-Projects/master/ESP32-CAM-Face-Recognition-Door-Lock/Circuit-Diagram.png", text: "ADIM 1: Yüzü tanıyan modül ile kapıdaki servoyu ve röleyi kontrol edin." }] }
 ];
 
 let selectedInventory = [];
+let currentProject = null;
+let currentStep = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-    // TÜRKÇE ALFABETİK SIRALAMA DÜZELTİLDİ
-    const sortedNames = Object.keys(materialData).sort((a, b) => a.localeCompare(b, 'tr'));
+    const sortedNames = Object.keys(materialData).sort((a, b) => a.localeCompare(a, 'tr'));
     renderInventory(sortedNames);
 });
 
@@ -99,11 +100,7 @@ function renderInventory(items) {
         const data = materialData[name];
         const div = document.createElement('div');
         div.className = 'inv-item';
-        div.innerHTML = `
-            <strong>${name}</strong>
-            <p style="font-size:10px; color:#aaa; margin:5px 0;">${data.desc}</p>
-            <span style="color:#00f3ff; font-size:9px; font-weight:bold;">EKLE +</span>
-        `;
+        div.innerHTML = `<strong>${name}</strong><p style="font-size:10px; color:#aaa; margin:5px 0;">${data.desc}</p><span style="color:#39ff14; font-size:9px;">Laboratuvara Ekle +</span>`;
         div.onclick = () => addToTable(name);
         list.appendChild(div);
     });
@@ -112,17 +109,13 @@ function renderInventory(items) {
 function addToTable(name) {
     if (!selectedInventory.includes(name)) {
         selectedInventory.push(name);
-        const countEl = document.getElementById('part-count');
-        if (countEl) countEl.innerText = selectedInventory.length;
-
+        document.getElementById('part-count').innerText = selectedInventory.length;
         const itemContainer = document.createElement('div');
         itemContainer.className = "placed-part";
         itemContainer.style.position = "absolute";
         itemContainer.style.left = (Math.random() * 65 + 10) + "%";
         itemContainer.style.top = (Math.random() * 45 + 15) + "%";
-        
         const imgSrc = materialData[name].img;
-        
         itemContainer.innerHTML = `
             <div style="position:relative; text-align:center; cursor:pointer;" onclick="removeFromTable('${name}', this.parentElement)">
                 <span style="position:absolute; top:-12px; right:-12px; background:#ff4d4d; color:white; border-radius:50%; width:22px; height:22px; font-size:13px; display:flex; align-items:center; justify-content:center; z-index:10; border:1px solid #fff;">×</span>
@@ -138,43 +131,50 @@ function addToTable(name) {
 function removeFromTable(name, element) {
     selectedInventory = selectedInventory.filter(item => item !== name);
     element.remove();
-    const countEl = document.getElementById('part-count');
-    if (countEl) countEl.innerText = selectedInventory.length;
+    document.getElementById('part-count').innerText = selectedInventory.length;
     checkProjects();
 }
 
 function checkProjects() {
-    const available = projectDatabase.filter(proj => 
-        proj.required.every(req => selectedInventory.includes(req))
-    );
-
+    const available = projectDatabase.filter(proj => proj.required.every(req => selectedInventory.includes(req)));
     const linkBox = document.getElementById('project-links');
     if (!linkBox) return;
-
     if (available.length > 0) {
-        linkBox.innerHTML = available.map(p => 
-            `<button class="project-btn" onclick="openManual('${p.id}')">${p.name} [KLAVUZ]</button>`
-        ).join('');
+        linkBox.innerHTML = available.map(p => `<button class="project-btn" onclick="openManual('${p.id}')">${p.name} [KLAVUZ]</button>`).join('');
     } else {
-        linkBox.innerHTML = `<p style="font-size: 11px; color: #888;">Gerekli parçaları ekleyin.</p>`;
+        linkBox.innerHTML = `<p style="font-size: 11px; color: #888;">Gerekli parçalar eklendiğinde kılavuz açılır.</p>`;
     }
 }
 
 function openManual(id) {
-    const proj = projectDatabase.find(p => p.id === id);
-    if (!proj) return;
-    document.getElementById('m-project-name').innerText = proj.name;
-    document.getElementById('m-project-steps').innerText = proj.steps;
+    currentProject = projectDatabase.find(p => p.id === id);
+    currentStep = 0;
+    updateStepUI();
+    document.getElementById('manual-modal').style.display = "block";
+}
+
+function updateStepUI() {
+    const step = currentProject.steps[currentStep];
+    document.getElementById('m-project-name').innerText = currentProject.name;
+    document.getElementById('step-indicator').innerText = `ADIM ${currentStep + 1} / ${currentProject.steps.length}`;
+    document.getElementById('m-project-steps').innerText = step.text;
     const imgEl = document.getElementById('m-project-img');
     imgEl.style.display = 'block';
-    imgEl.src = proj.image;
+    imgEl.src = step.img;
     imgEl.onerror = function() {
         this.style.display = 'none';
         const parent = this.parentElement;
-        parent.innerHTML = `<div style="color:#666; font-size:14px; text-align:center; padding:20px;">Şema görseli şu an yüklenemiyor, ancak yukarıdaki adımları takip ederek devreyi kurabilirsiniz.</div>`;
+        parent.innerHTML = `<div style="color:#666; font-size:14px; text-align:center; padding:20px;">Görsel yüklenemedi. Link internetten çekiliyor ancak bazen kaynak site erişimi kısıtlayabiliyor.</div>`;
     };
-    document.getElementById('m-project-parts').innerHTML = proj.required.map(p => `<span class="part-tag">${p}</span>`).join('');
-    document.getElementById('manual-modal').style.display = "block";
+    document.getElementById('m-project-parts').innerHTML = currentProject.required.map(p => `<span class="part-tag">${p}</span>`).join('');
+}
+
+function nextStep() {
+    if (currentStep < currentProject.steps.length - 1) { currentStep++; updateStepUI(); }
+}
+
+function prevStep() {
+    if (currentStep > 0) { currentStep--; updateStepUI(); }
 }
 
 function closeManual() {
