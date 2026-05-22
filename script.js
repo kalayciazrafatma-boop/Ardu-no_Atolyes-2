@@ -43,102 +43,44 @@ const materialData = {
     "Piezo Buzzer": { img: "piezo_buzzer.jpg", desc: "Titreşimle ses üreten ince buzzer." },
     "Pil Yuvası": { img: "pil_yuvasi.jpg", desc: "Pilleri devreye bağlamayı sağlar." },
     "PIR Sensör": { img: "pir_sensor.jpg", desc: "Harekete duyarlı kızılötesi sensör." },
-    "Potansiyometre": { img: "potansiyometre.jpg", desc: "Ayarlanabilir direnç (ses/ışık ayarı)." },
-    "Redüktörlü Motor": { img: "reduktorlu_motor.jpg", desc: "Güçlü hareket sağlayan dişli motor." },
+    "Potansiyometre": { img: "potansiyometre.jpg", desc: "Ayarlanabilir direnç." },
+    "Redüktörlü Motor": { img: "reduktorlu_motor.jpg", desc: "Güçlü hareket sağlayan motor." },
     "Voltaj Regülatörü": { img: "regulator.jpg", desc: "Voltajı sabit bir değere düşürür." },
     "RFID Kit": { img: "rfid_kit.jpg", desc: "Kartlı kapı açma sistemi kiti." },
     "RTC Saat Modülü": { img: "rtc_modul.jpg", desc: "Gerçek zamanlı saat bilgisini tutar." },
-    "Sarhoş Tekerlek": { img: "sarhos_tekerlek.jpg", desc: "Robotun kolay dönmesini sağlayan teker." },
+    "Sarhoş Tekerlek": { img: "sarhos_tekerlek.jpg", desc: "Robotun kolay dönmesini sağlar." },
     "Servo Motor": { img: "servo.jpg", desc: "Hassas açıyla dönen (0-180) motor." },
-    "Ses Sensörü": { img: "ses_sensoru.jpg", desc: "Sesi algılayıp sinyale çevirir." },
+    "Ses Sensörü": { img: "ses_sensoru.jpg", desc: "Sesleri elektrik sinyaline çevirir." },
     "Sigorta": { img: "sigorta.jpg", desc: "Devreyi aşırı akıma karşı korur." },
-    "Su Pompası": { img: "su_pompasi.jpg", desc: "Sıvı aktarımını yapan motor." },
+    "Su Pompası": { img: "su_pompasi.jpg", desc: "Sıvı aktarımını sağlayan motor." },
     "Tact Buton": { img: "tact_buton.jpg", desc: "Küçük devre tetikleyici buton." },
     "Tekerlek": { img: "Tekerlek.jpg", desc: "Robot şaseleri için ana tekerlek." },
     "Touch Pad": { img: "touch_pad.jpg", desc: "Dokunmatik kontrol yüzeyi." },
     "TP4056 Şarj Modülü": { img: "tp4056.jpg", desc: "Lityum pil şarj devresi." },
     "Transistör": { img: "transistor.jpg", desc: "Sinyalleri anahtarlayan veya yükselten eleman." },
-    "USB Kablo": { img: "usb.jpg", desc: "Arduino'ya kod yükleme kablosu." },
+    "USB Kablo": { img: "usb.jpg", desc: "Arduino kod yükleme kablosu." },
     "Yağmur Sensörü": { img: "yagmur_sensoru.jpg", desc: "Su damlalarını algılayan sensör." }
 };
 
 const projectDatabase = [
-    { id: "p1", name: "Bluetooth Araba", required: ["Arduino Uno R3", "HC-06 Bluetooth", "L298N Motor Sürücü", "Redüktörlü Motor", "Tekerlek", "9V Pil"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/ArduPED/Arduino/master/Bluetooth_Car/schematic.png", text: "ADIM 1: Motorları şaseye sabitleyin ve motor sürücüye bağlayın." },
-          { img: "https://i.imgur.com/8fGk0Rj.png", text: "ADIM 2: Bluetooth RX-TX bağlantısını Arduino pinlerine çapraz yapın." }
-      ]},
-    { id: "p2", name: "Engelden Kaçan Robot", required: ["Arduino Uno R3", "Mesafe Sensörü", "Servo Motor", "L298N Motor Sürücü", "Tekerlek"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/hc-sr04/hc-sr04-arduino-baglanti-semasi.png", text: "ADIM 1: Mesafe sensörünü servo üzerine monte edip Arduino'ya bağlayın." },
-          { img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/hc-sr04/engelden-kacan-robot.png", text: "ADIM 2: Robotun önündeki engeli görmesi için kodları yükleyin." }
-      ]},
-    { id: "p3", name: "RFID Kapı Sistemi", required: ["Arduino Uno R3", "RFID Kit", "Servo Motor", "LCD Ekran"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/omersiar/RFID-Door-Lock/master/Images/Schematic.png", text: "ADIM 1: RFID okuyucuyu SPI pinlerine bağlayın." },
-          { img: "https://i.imgur.com/kP8G9m3.png", text: "ADIM 2: Tanımlı kart okunduğunda servoyu döndürecek algoritmayı kurun." }
-      ]},
-    { id: "p4", name: "Yangın Alarmı", required: ["Arduino Uno R3", "Alev Sensörü", "Buzzer", "LED"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/alev-sensoru/yangin-alarm.png", text: "ADIM 1: Alev sensöründen analog veri okuyun." },
-          { img: "https://i.imgur.com/mOQW7uO.png", text: "ADIM 2: Ateş algılanınca buzzer'ı öttürecek kodu aktif edin." }
-      ]},
-    { id: "p5", name: "Akıllı Sulama", required: ["Arduino Uno R3", "Nem Kontrol Sensörü", "Su Pompası", "24V Röle"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/toprak-nem-sensoru/akilli-sulama.png", text: "ADIM 1: Toprak nem sensörünü ve pompayı sisteme bağlayın." }
-      ]},
-    { id: "p6", name: "Ses Kontrollü Işık", required: ["Arduino Uno R3", "Mikrofon Modülü", "24V Röle", "9V Pil"], 
-      steps: [
-          { img: "https://i.imgur.com/Z9M5y7h.png", text: "ADIM 1: Mikrofon modülünden gelen ses şiddetine göre röleyi tetikleyin." }
-      ]},
-    { id: "p7", name: "Joystick Kontrollü Araba", required: ["Arduino Uno R3", "Joystick", "L298N Motor Sürücü", "Tekerlek"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/Fisat-Robotics/Joystick-Controlled-Robot/master/Joystick_Robot_Schematic.png", text: "ADIM 1: Joystick X-Y değerlerini motor sürücüye yön komutu olarak iletin." }
-      ]},
-    { id: "p8", name: "IR Kumandalı Robot", required: ["Arduino Uno R3", "IR Kumanda Kiti", "L298N Motor Sürücü", "Tekerlek"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/V-E-S-T-A/IR-Remote-Control-Car/master/Circuit_Diagram.png", text: "ADIM 1: Kumanda tuş kodlarını Arduino'ya tanıtın." }
-      ]},
-    { id: "p9", name: "Güvenlik Sistemi", required: ["Arduino Uno R3", "PIR Sensör", "Buzzer", "Keypad"], 
-      steps: [
-          { img: "https://i.imgur.com/X4Wf0M0.png", text: "ADIM 1: PIR ile hareket algılandığında şifre girilene kadar alarm verin." }
-      ]},
-    { id: "p10", name: "Gaz Alarmı", required: ["Arduino Uno R3", "Gaz Sensörü", "Buzzer", "LCD Ekran"], 
-      steps: [
-          { img: "https://i.imgur.com/uGzZ0Bv.png", text: "ADIM 1: Gaz kaçağı durumunda LCD'de uyarı mesajı gösterin." }
-      ]},
-    { id: "p11", name: "WiFi Kamera Sistemi", required: ["ESP32-Cam", "PIR Sensör", "9V Pil"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/RuiSantosdotme/ESP32-CAM-Projects/master/ESP32-CAM-PIR-Sensor-Photo/Circuit-Diagram.png", text: "ADIM 1: Hareket anında ESP32-Cam ile fotoğraf çekip gönderin." }
-      ]},
-    { id: "p12", name: "Nabız Ölçer", required: ["Arduino Uno R3", "Nabız Sensörü", "LCD Ekran"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/nabiz-sensoru/nabiz-olcer.png", text: "ADIM 1: Parmaktaki kan akışına göre kalp ritmini hesaplayın." }
-      ]},
-    { id: "p13", name: "Akıllı Sera", required: ["Arduino Uno R3", "Nem Kontrol Sensörü", "Yağmur Sensörü", "LCD Ekran"], 
-      steps: [
-          { img: "https://i.imgur.com/vHqB77X.png", text: "ADIM 1: Sera içi ve dışı sensör verilerini ekrana basın." }
-      ]},
-    { id: "p14", name: "Saat Sistemi", required: ["Arduino Uno R3", "RTC Saat Modülü", "LCD Ekran"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/rtc-saat-modulu/saat.png", text: "ADIM 1: Gerçek zaman modülünden veriyi çekip güncel saati gösterin." }
-      ]},
-    { id: "p15", name: "Touch Kontrollü Lamba", required: ["Arduino Uno R3", "Touch Pad", "24V Röle"], 
-      steps: [
-          { img: "https://i.imgur.com/9f7f7f9.png", text: "ADIM 1: Dokunmatik yüzeye basıldığında röle ile lambayı yakın." }
-      ]},
-    { id: "p16", name: "Akıllı Park Sensörü", required: ["Arduino Uno R3", "Mesafe Sensörü", "Buzzer", "LCD Ekran"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/hc-sr04/hc-sr04-arduino-baglanti-semasi.png", text: "ADIM 1: Mesafeyi santimetreye çevirip sesli uyarı kurun." }
-      ]},
-    { id: "p17", name: "Çizgi İzleyen Akıllı Robot", required: ["Arduino Uno R3", "L298N Motor Sürücü", "Çizgi Sensörü", "Tekerlek"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/cizgi-izleyen/cizgi-izleyen.png", text: "ADIM 1: Sensörleri şaseye monte edip çizgiyi takip ettirin." }
-      ]},
-    { id: "p18", name: "Yüz Tanımalı Ev Sistemi", required: ["ESP32-Cam", "24V Röle", "Servo Motor", "9V Pil"], 
-      steps: [
-          { img: "https://raw.githubusercontent.com/RuiSantosdotme/ESP32-CAM-Projects/master/ESP32-CAM-Face-Recognition-Door-Lock/Circuit-Diagram.png", text: "ADIM 1: Yüzü tanıyan modül ile kapı kilit mekanizmasını kontrol edin." }
-      ]}
+    { id: "p1", name: "Bluetooth Araba", required: ["Arduino Uno R3", "HC-06 Bluetooth", "L298N Motor Sürücü", "Redüktörlü Motor", "Tekerlek"], steps: [{ img: "https://raw.githubusercontent.com/ArduPED/Arduino/master/Bluetooth_Car/schematic.png", text: "ADIM 1: Motorları şaseye takın ve Bluetooth modülünü RX-TX pinlerine bağlayın." }, { img: "https://i.ibb.co/VWV0pWJ/bluetooth.png", text: "ADIM 2: Motor sürücü bağlantılarını yapıp kodları yükleyin." }] },
+    { id: "p2", name: "Engelden Kaçan Robot", required: ["Arduino Uno R3", "Mesafe Sensörü", "Servo Motor", "L298N Motor Sürücü", "Tekerlek"], steps: [{ img: "https://raw.githubusercontent.com/ArduPED/Arduino/master/Obstacle_Avoiding_Robot/schematic.png", text: "ADIM 1: Mesafe sensörünü servo üzerine monte edin." }, { img: "https://i.ibb.co/6X2pYpX/obstacle.png", text: "ADIM 2: Robotun önündeki engeli görmesi için kodları aktif edin." }] },
+    { id: "p3", name: "RFID Kapı Sistemi", required: ["Arduino Uno R3", "RFID Kit", "Servo Motor", "LCD Ekran"], steps: [{ img: "https://i.ibb.co/kP8G9m3/rfid.png", text: "ADIM 1: RFID okuyucuyu Arduino SPI pinlerine bağlayın." }] },
+    { id: "p4", name: "Yangın Alarmı", required: ["Arduino Uno R3", "Alev Sensörü", "Buzzer", "LED"], steps: [{ img: "https://i.ibb.co/mOQW7uO/fire.png", text: "ADIM 1: Alev sensörü eşik değerini analog pin üzerinden okuyun." }] },
+    { id: "p5", name: "Akıllı Sulama", required: ["Arduino Uno R3", "Nem Kontrol Sensörü", "Su Pompası", "24V Röle"], steps: [{ img: "https://i.ibb.co/vHqB77X/water.png", text: "ADIM 1: Toprak nem sensörünü ve pompayı röle üzerinden sisteme bağlayın." }] },
+    { id: "p6", name: "Ses Kontrollü Işık", required: ["Arduino Uno R3", "Mikrofon Modülü", "24V Röle"], steps: [{ img: "https://i.ibb.co/Z9M5y7h/sound.png", text: "ADIM 1: Mikrofon modülünden gelen ses şiddetine göre röleyi tetikleyin." }] },
+    { id: "p7", name: "Joystick Araba", required: ["Arduino Uno R3", "Joystick", "L298N Motor Sürücü", "Tekerlek"], steps: [{ img: "https://i.ibb.co/lM5Y0N5/joy.png", text: "ADIM 1: Joystick verilerine göre motor hızını ayarlayın." }] },
+    { id: "p8", name: "IR Kumandalı Robot", required: ["Arduino Uno R3", "IR Kumanda Kiti", "L298N Motor Sürücü", "Tekerlek"], steps: [{ img: "https://i.ibb.co/1GfS2Z7/ir.png", text: "ADIM 1: Kumanda tuş kodlarını Arduino'ya tanıtın." }] },
+    { id: "p9", name: "Güvenlik Sistemi", required: ["Arduino Uno R3", "PIR Sensör", "Buzzer", "Keypad"], steps: [{ img: "https://i.ibb.co/X4Wf0M0/security.png", text: "ADIM 1: Hareket algılandığında şifre girilene kadar alarm verin." }] },
+    { id: "p10", name: "Gaz Alarmı", required: ["Arduino Uno R3", "Gaz Sensörü", "Buzzer", "LCD Ekran"], steps: [{ img: "https://i.ibb.co/uGzZ0Bv/gas.png", text: "ADIM 1: Gaz sızıntısı durumunda LCD ekranı kırmızı yapıp alarmı çalın." }] },
+    { id: "p11", name: "WiFi Kamera", required: ["ESP32-Cam", "PIR Sensör", "9V Pil"], steps: [{ img: "https://i.ibb.co/tZ1T8Wk/cam.png", text: "ADIM 1: Hareket olduğunda ESP32-Cam ile fotoğraf çekip gönderin." }] },
+    { id: "p12", name: "Nabız Ölçer", required: ["Arduino Uno R3", "Nabız Sensörü", "LCD Ekran"], steps: [{ img: "https://i.ibb.co/d9vD9vD/pulse.png", text: "ADIM 1: Nabız verisini parmaktan okuyup LCD ekranda grafikleyin." }] },
+    { id: "p13", name: "Akıllı Sera", required: ["Arduino Uno R3", "Nem Kontrol Sensörü", "Yağmur Sensörü", "LCD Ekran"], steps: [{ img: "https://i.ibb.co/vHqB77X/sera.png", text: "ADIM 1: Sera içi nem ve dış yağmur durumunu anlık takip edin." }] },
+    { id: "p14", name: "Saat Sistemi", required: ["Arduino Uno R3", "RTC Saat Modülü", "LCD Ekran"], steps: [{ img: "https://i.ibb.co/R8k7Y6p/clock.png", text: "ADIM 1: RTC modülünden veriyi çekip güncel saati gösterin." }] },
+    { id: "p15", name: "Touch Lamba", required: ["Arduino Uno R3", "Touch Pad", "24V Röle"], steps: [{ img: "https://i.ibb.co/9f7f7f9/touch.png", text: "ADIM 1: Dokunmatik yüzeye basıldığında röle ile lambayı yakın." }] },
+    { id: "p16", name: "Park Sensörü", required: ["Arduino Uno R3", "Mesafe Sensörü", "Buzzer", "LCD Ekran"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/hc-sr04/hc-sr04-arduino-baglanti-semasi.png", text: "ADIM 1: Mesafe sensörünü bağlayıp buzzer sesini hızlandırın." }] },
+    { id: "p17", name: "Çizgi İzleyen", required: ["Arduino Uno R3", "L298N Motor Sürücü", "Çizgi Sensörü", "Tekerlek"], steps: [{ img: "https://raw.githubusercontent.com/Robotistan/Arduino-Dersleri/main/cizgi-izleyen/cizgi-izleyen.png", text: "ADIM 1: Sensörleri siyah çizgiyi takip edecek şekilde monte edin." }] },
+    { id: "p18", name: "Yüz Tanıma", required: ["ESP32-Cam", "24V Röle", "Servo Motor", "9V Pil"], steps: [{ img: "https://i.ibb.co/tZ1T8Wk/face.png", text: "ADIM 1: Tanımlı yüz algılandığında röleyi tetikleyip kapıyı açın." }] }
 ];
 
 let selectedInventory = [];
@@ -146,7 +88,7 @@ let currentProject = null;
 let currentStep = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-    const sortedNames = Object.keys(materialData).sort((a, b) => a.localeCompare(b, 'tr'));
+    const sortedNames = Object.keys(materialData).sort((a, b) => a.localeCompare(a, 'tr'));
     renderInventory(sortedNames);
 });
 
@@ -173,11 +115,10 @@ function addToTable(name) {
         itemContainer.style.position = "absolute";
         itemContainer.style.left = (Math.random() * 65 + 10) + "%";
         itemContainer.style.top = (Math.random() * 45 + 15) + "%";
-        const imgSrc = materialData[name].img;
         itemContainer.innerHTML = `
             <div style="position:relative; text-align:center; cursor:pointer;" onclick="removeFromTable('${name}', this.parentElement)">
-                <span style="position:absolute; top:-12px; right:-12px; background:#ff4d4d; color:white; border-radius:50%; width:22px; height:22px; font-size:13px; display:flex; align-items:center; justify-content:center; z-index:10; border:1px solid #fff;">×</span>
-                <img src="${imgSrc}" width="80" style="border: 2px solid #00f3ff; border-radius: 8px; background: #fff; box-shadow: 0 0 10px rgba(0,243,255,0.3);">
+                <span style="position:absolute; top:-12px; right:-12px; background:#ff4d4d; color:white; border-radius:50%; width:22px; height:22px; font-size:13px; display:flex; align-items:center; justify-content:center; z-index:100; border:1px solid #fff;">×</span>
+                <img src="${materialData[name].img}" width="80" style="border: 2px solid #00f3ff; border-radius: 8px; background: #fff; box-shadow: 0 0 10px rgba(0,243,255,0.3);">
                 <div style="font-size: 10px; color: #00f3ff; font-weight: bold; margin-top: 5px;">${name}</div>
             </div>
         `;
@@ -200,7 +141,7 @@ function checkProjects() {
     if (available.length > 0) {
         linkBox.innerHTML = available.map(p => `<button class="project-btn" onclick="openManual('${p.id}')">${p.name} [KLAVUZ]</button>`).join('');
     } else {
-        linkBox.innerHTML = `<p style="font-size: 11px; color: #888;">Eksik parçaları ekleyin.</p>`;
+        linkBox.innerHTML = `<p style="font-size: 11px; color: #888;">Gerekli parçaları ekleyin.</p>`;
     }
 }
 
