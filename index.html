@@ -10,7 +10,7 @@
 <body>
 
     <div class="app-container">
-        <!-- SOL PANEL -->
+        <!-- SOL PANEL: Envanter -->
         <aside class="sidebar">
             <div class="logo">ARDUINO TASARIM MERKEZİ</div>
             <div class="search-box">
@@ -20,11 +20,11 @@
             <div id="inventory-list" class="inventory-grid"></div>
         </aside>
 
-        <!-- ANA ALAN -->
+        <!-- ANA ALAN: Deney Masası -->
         <main class="workbench">
             <div class="hud-display">
                 <div class="status-panel">
-                    <div>DURUM: <span class="neon-text">HAZIR</span></div>
+                    <div>SİSTEM: <span class="neon-text">HAZIR</span></div>
                     <div>MASADAKİ PARÇA: <span id="part-count">0</span></div>
                 </div>
                 <div class="project-panel">
@@ -41,28 +41,31 @@
         </main>
     </div>
 
-    <!-- PROJE YAPIM REHBERİ MODAL -->
+    <!-- ADIM ADIM LEGO KILAVUZU MODAL -->
     <div id="manual-modal" class="modal">
         <div class="manual-book">
             <span class="close-manual" onclick="closeManual()">&times;</span>
             <header class="manual-header">
-                <div class="manual-id">PROJE YAPIM REHBERİ</div>
+                <div id="step-indicator" class="manual-id">ADIM 1 / 3</div>
                 <h2 id="m-project-name">PROJE ADI</h2>
             </header>
             <div class="manual-body">
                 <div class="manual-visual">
-                    <img id="m-project-img" src="" alt="Devre Şeması">
+                    <img id="m-project-img" src="" alt="Adım Görseli">
                 </div>
                 <div class="manual-steps">
-                    <h3>ADIM ADIM MONTAJ</h3>
+                    <h3>İŞLEM TALİMATI</h3>
                     <div class="step-content">
                         <p id="m-project-steps"></p>
                     </div>
                 </div>
             </div>
             <footer class="manual-footer">
-                <h3>GEREKLİ PARÇALAR</h3>
-                <div id="m-project-parts" class="parts-tag-cloud"></div>
+                <div class="nav-controls">
+                    <button class="nav-btn" onclick="prevStep()">← Önceki Adım</button>
+                    <div id="m-project-parts" class="parts-tag-cloud"></div>
+                    <button class="nav-btn" onclick="nextStep()">Sonraki Adım →</button>
+                </div>
             </footer>
         </div>
     </div>
